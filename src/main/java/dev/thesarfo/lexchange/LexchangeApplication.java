@@ -1,0 +1,13 @@
+package dev.thesarfo.lexchange;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LexchangeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LexchangeApplication.class, args);
+	}
+
+}
