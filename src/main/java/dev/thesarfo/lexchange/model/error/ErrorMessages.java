@@ -2,6 +2,8 @@ package dev.thesarfo.lexchange.model.error;
 
 public class ErrorMessages {
 
+    private ErrorMessages(){}
+
     public static final String USER_NOT_FOUND = "User not found with username: ";
     public static final String USER_EMAIL_ALREADY_EXISTS = "User already exists with email: ";
     public static final String VALID_EMAIL_ADDRESS = "Please enter valid e-mail address";
