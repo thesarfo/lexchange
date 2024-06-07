@@ -1,4 +1,4 @@
-package dev.thesarfo.lexchange.controller;
+package dev.thesarfo.lexchange.controller.auth;
 
 import dev.thesarfo.lexchange.model.dto.request.user.UserRegisterRequest;
 import dev.thesarfo.lexchange.model.success.SuccessMessages;

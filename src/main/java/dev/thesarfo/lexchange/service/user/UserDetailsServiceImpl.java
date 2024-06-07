@@ -1,5 +1,6 @@
 package dev.thesarfo.lexchange.service.user;
 
+
 import dev.thesarfo.lexchange.entity.user.User;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
 import dev.thesarfo.lexchange.repository.user.UserRepository;
