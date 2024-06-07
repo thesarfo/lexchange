@@ -36,8 +36,8 @@ public class User {
 
     private String password;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private UserRole userRole=UserRole.USER;
+    private UserRole userRole;
 
 }

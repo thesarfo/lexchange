@@ -4,6 +4,7 @@ import dev.thesarfo.lexchange.entity.user.User;
 import dev.thesarfo.lexchange.exception.user.UserAlreadyExistsException;
 import dev.thesarfo.lexchange.model.dto.request.user.UserRegisterRequest;
 import dev.thesarfo.lexchange.model.dto.response.user.UserResponseDto;
+import dev.thesarfo.lexchange.model.enums.UserRole;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
 import dev.thesarfo.lexchange.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
                 .email(userRegisterRequest.email())
                 .username(userRegisterRequest.username())
                 .password(passwordEncoder.encode(userRegisterRequest.password()))
+                .userRole(UserRole.USER)
                 .build();
         User savedUser = userRepository.save(user);
 
