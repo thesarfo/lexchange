@@ -1,8 +1,8 @@
 package dev.thesarfo.lexchange.controller.auth;
 
-import dev.thesarfo.lexchange.model.dto.request.user.UserRegisterRequest;
+import dev.thesarfo.lexchange.model.dto.request.user.UserLoginRequest;
 import dev.thesarfo.lexchange.model.success.SuccessMessages;
-import dev.thesarfo.lexchange.service.auth.register.UserRegisterServiceImpl;
+import dev.thesarfo.lexchange.service.auth.login.UserLoginServiceImpl;
 import dev.thesarfo.lexchange.util.ResponseHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/auth/signup")
-public class SignUpController{
+@RequestMapping("api/v1/auth/signin")
+public class SignInController {
 
-    private final UserRegisterServiceImpl userRegisterService;
+private final UserLoginServiceImpl userLoginService;
 
     @PostMapping
-    public ResponseEntity<Object> register(@Valid @RequestBody UserRegisterRequest request){
-        return ResponseHandler.successResponse(SuccessMessages.REGISTRATION_SUCCESSFUL,
-                userRegisterService.registerUser(request), HttpStatus.CREATED);
+    public ResponseEntity<Object> signin(@Valid @RequestBody UserLoginRequest request){
+        return ResponseHandler.successResponse(SuccessMessages.LOGIN_SUCCESSFUL,
+                userLoginService.signin(request), HttpStatus.OK);
     }
 }
