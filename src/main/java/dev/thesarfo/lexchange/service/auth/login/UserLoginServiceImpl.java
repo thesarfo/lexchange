@@ -44,11 +44,6 @@ public class UserLoginServiceImpl implements UserLoginService {
                     .map(GrantedAuthority::getAuthority)
                     .toList();
 
-
-//            return ResponseEntity.ok(new JwtResponse(jwt,
-//                    userDetails.getId(),
-//                    userDetails.getUsername(),
-//                    roles));
             return new JwtResponse(jwt,
                     userDetails.getId(),
                     userDetails.getUsername(),
