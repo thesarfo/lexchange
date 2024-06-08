@@ -4,16 +4,12 @@ import dev.thesarfo.lexchange.model.dto.request.user.UserLoginRequest;
 import dev.thesarfo.lexchange.model.dto.response.user.JwtResponse;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
 import dev.thesarfo.lexchange.service.user.UserDetailsImpl;
-import dev.thesarfo.lexchange.service.user.UserDetailsServiceImpl;
 import dev.thesarfo.lexchange.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,7 +21,6 @@ import java.util.List;
 public class UserLoginServiceImpl implements UserLoginService {
 
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsServiceImpl userDetailsService;
     private final JwtUtil jwtUtil;
 
     public JwtResponse signin(UserLoginRequest loginRequest) {
