@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -15,6 +16,11 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(User user){
         this.user = user;
+    }
+
+
+    public String getId(){
+        return user.getId();
     }
 
     @Override
@@ -51,6 +57,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
