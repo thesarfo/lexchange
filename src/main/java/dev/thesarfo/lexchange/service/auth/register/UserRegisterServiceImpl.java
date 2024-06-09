@@ -26,14 +26,16 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
     @Override
     public UserResponseDto registerUser(UserRegisterRequest userRegisterRequest) {
-        if (userRepository.existsByEmail(userRegisterRequest.email())){
-            throw new UserAlreadyExistsException(ErrorMessages.USER_EMAIL_ALREADY_EXISTS + userRegisterRequest.email());
+        if (userRepository.existsByEmail(userRegisterRequest.email()) ||
+                userRepository.existsByUsername(userRegisterRequest.username())){
+            throw new UserAlreadyExistsException(ErrorMessages.USER_ALREADY_EXISTS);
         }
 
         User user = User.builder()
                 .email(userRegisterRequest.email())
                 .username(userRegisterRequest.username())
                 .password(passwordEncoder.encode(userRegisterRequest.password()))
+                .createdAt(LocalDateTime.now())
                 .userRole(UserRole.USER)
                 .build();
         User savedUser = userRepository.save(user);

@@ -2,6 +2,8 @@ package dev.thesarfo.lexchange.entity.user;
 
 import dev.thesarfo.lexchange.model.enums.UserRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,6 +41,7 @@ public class User {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
     @OneToOne(mappedBy = "user")
