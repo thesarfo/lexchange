@@ -39,8 +39,9 @@ public class UserRegisterServiceImpl implements UserRegisterService{
                 .userRole(UserRole.USER)
                 .build();
         User savedUser = userRepository.save(user);
-        UserProfile profile = new UserProfile();
 
+        UserProfile profile = new UserProfile();
+        profile.setUser(savedUser);
         userProfileRepository.save(profile);
 
         return createUserAndReturnUserResponse(savedUser);
