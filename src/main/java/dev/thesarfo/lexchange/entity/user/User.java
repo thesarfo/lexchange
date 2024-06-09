@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -39,5 +40,8 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private UserRole userRole;
+
+    @OneToOne(mappedBy = "user")
+    private UserProfile userProfile;
 
 }
