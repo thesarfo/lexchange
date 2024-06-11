@@ -11,4 +11,8 @@ public class ErrorMessages {
     public static final String USER_ALREADY_EXISTS = "User already exists with this username or email";
     public static final String INVALID_CREDENTIALS = "Invalid credentials";
     public static final String MINIMUM_PASSWORD_LENGTH = "Minimum password length is 8 characters.";
+    public static final String PROFILE_NOT_FOUND = "Profile not found ";
+    public static final String OLD_PASSWORD_INCORRECT = "Old password is incorrect";
+    public static final String NEW_PASSWORD_SAME_AS_OLD = "New password cannot be the same as old password";
+    public static final String OLD_AND_NEW_PASSWORD_EQUAL = "New password cannot be the same as the old password";
 }

@@ -1,12 +1,15 @@
 package dev.thesarfo.lexchange.service.auth.register;
 
 import dev.thesarfo.lexchange.entity.user.User;
+import dev.thesarfo.lexchange.entity.user.UserProfile;
 import dev.thesarfo.lexchange.exception.user.UserAlreadyExistsException;
 import dev.thesarfo.lexchange.model.dto.request.user.UserRegisterRequest;
 import dev.thesarfo.lexchange.model.dto.response.user.UserResponseDto;
 import dev.thesarfo.lexchange.model.enums.UserRole;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
+import dev.thesarfo.lexchange.repository.user.UserProfileRepository;
 import dev.thesarfo.lexchange.repository.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,11 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserProfileRepository userProfileRepository;
 
 
     @Override
+    @Transactional
     public UserResponseDto registerUser(UserRegisterRequest userRegisterRequest) {
         if (userRepository.existsByEmail(userRegisterRequest.email()) ||
                 userRepository.existsByUsername(userRegisterRequest.username())){
@@ -36,6 +41,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
                 .userRole(UserRole.USER)
                 .build();
         User savedUser = userRepository.save(user);
+
 
         return createUserAndReturnUserResponse(savedUser);
     }
