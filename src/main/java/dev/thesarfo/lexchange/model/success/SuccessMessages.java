@@ -8,4 +8,5 @@ public class SuccessMessages {
     public static final String LOGIN_SUCCESSFUL = "Login successful";
     public static final String PROFILE_RETRIEVED = "Profile retrieved";
     public static final String PROFILE_UPDATED = "Profile updated";
+    public static final String PASSWORD_CHANGED = "Password changed";
 }
