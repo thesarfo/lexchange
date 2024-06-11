@@ -1,8 +1,8 @@
-package dev.thesarfo.lexchange.controller.profile;
+package dev.thesarfo.lexchange.controller.auth;
 
-import dev.thesarfo.lexchange.model.dto.request.profile.UpdateProfileRequest;
+import dev.thesarfo.lexchange.model.dto.request.user.ChangePasswordRequest;
 import dev.thesarfo.lexchange.model.success.SuccessMessages;
-import dev.thesarfo.lexchange.service.profile.ProfileServiceImpl;
+import dev.thesarfo.lexchange.service.auth.update.ChangePasswordService;
 import dev.thesarfo.lexchange.util.ResponseHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/profile")
-public class UpdateProfileController {
+@RequestMapping("/api/v1/auth/change-password")
+public class ChangePasswordController {
 
-    private final ProfileServiceImpl profileService;
+    private final ChangePasswordService cps;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateProfile(@PathVariable Long id, @Valid @RequestBody UpdateProfileRequest request){
-        return ResponseHandler.successResponse(SuccessMessages.PROFILE_UPDATED, profileService.updateProfile(id, request),
-                HttpStatus.OK);
+    public ResponseEntity<Object> changePassword(@PathVariable String id, @Valid @RequestBody ChangePasswordRequest request){
+        return ResponseHandler.response(SuccessMessages.PASSWORD_CHANGED, HttpStatus.OK, cps.changePassword(id, request));
     }
+
 }
