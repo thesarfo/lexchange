@@ -9,6 +9,7 @@ import dev.thesarfo.lexchange.model.enums.UserRole;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
 import dev.thesarfo.lexchange.repository.user.UserProfileRepository;
 import dev.thesarfo.lexchange.repository.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
 
     @Override
+    @Transactional
     public UserResponseDto registerUser(UserRegisterRequest userRegisterRequest) {
         if (userRepository.existsByEmail(userRegisterRequest.email()) ||
                 userRepository.existsByUsername(userRegisterRequest.username())){
@@ -40,9 +42,6 @@ public class UserRegisterServiceImpl implements UserRegisterService{
                 .build();
         User savedUser = userRepository.save(user);
 
-        UserProfile profile = new UserProfile();
-        profile.setUser(savedUser);
-        userProfileRepository.save(profile);
 
         return createUserAndReturnUserResponse(savedUser);
     }

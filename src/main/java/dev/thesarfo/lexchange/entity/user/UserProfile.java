@@ -29,11 +29,14 @@ public class UserProfile {
 
     private String username;
 
+    private String email;
+
     private String bio;
 
     private String profilePhoto;
 
     public UserProfile(User user){
         this.username = user.getUsername();
+        this.email = user.getEmail();
     }
 }

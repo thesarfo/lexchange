@@ -54,6 +54,7 @@ public class User {
         if (this.userProfile == null){
             this.userProfile = new UserProfile(this);
             this.userProfile.setUsername(this.username);
+            this.userProfile.setEmail(this.email);
             this.userProfile.setUser(this);
         }
     }
