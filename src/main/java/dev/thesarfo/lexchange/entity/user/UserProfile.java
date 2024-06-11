@@ -33,7 +33,7 @@ public class UserProfile {
 
     private String bio;
 
-    private String profilePhoto;
+//    private String profilePhoto;
 
     public UserProfile(User user){
         this.username = user.getUsername();
