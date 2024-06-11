@@ -23,7 +23,7 @@ public class UpdateProfileController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updateProfile(@PathVariable Long id, @Valid @RequestBody UpdateProfileRequest request){
-        return ResponseHandler.successResponse(SuccessMessages.PROFILE_UPDATED, profileService.updateProfile(id, request),
-                HttpStatus.OK);
+        return ResponseHandler.response(SuccessMessages.PROFILE_UPDATED,
+                HttpStatus.OK, profileService.updateProfile(id, request));
     }
 }

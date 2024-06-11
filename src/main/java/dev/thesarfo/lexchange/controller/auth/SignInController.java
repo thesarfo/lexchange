@@ -22,7 +22,6 @@ private final UserLoginServiceImpl userLoginService;
 
     @PostMapping
     public ResponseEntity<Object> signin(@Valid @RequestBody UserLoginRequest request){
-        return ResponseHandler.successResponse(SuccessMessages.LOGIN_SUCCESSFUL,
-                userLoginService.signin(request), HttpStatus.OK);
+        return ResponseHandler.response(SuccessMessages.LOGIN_SUCCESSFUL, HttpStatus.OK, userLoginService.signin(request));
     }
 }
