@@ -22,7 +22,7 @@ public class SignUpController{
 
     @PostMapping
     public ResponseEntity<Object> register(@Valid @RequestBody UserRegisterRequest request){
-        return ResponseHandler.successResponse(SuccessMessages.REGISTRATION_SUCCESSFUL,
-                userRegisterService.registerUser(request), HttpStatus.CREATED);
+        return ResponseHandler.response(SuccessMessages.REGISTRATION_SUCCESSFUL,
+                HttpStatus.CREATED, userRegisterService.registerUser(request));
     }
 }

@@ -20,7 +20,7 @@ public class RetrieveProfileController {
 
     @GetMapping("/{username}")
     public ResponseEntity<Object> retrieveProfile(@PathVariable String username) {
-        return ResponseHandler.successResponse(SuccessMessages.PROFILE_RETRIEVED,
-                profileService.retrieveProfile(username), HttpStatus.OK);
+        return ResponseHandler.response(SuccessMessages.PROFILE_RETRIEVED, HttpStatus.OK,
+                profileService.retrieveProfile(username));
     }
 }
