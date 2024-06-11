@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -19,6 +20,7 @@ public class JwtUtil {
 
     @Value ("${jwt.secret}")
     private String jwtSecretKey;
+
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -57,11 +59,11 @@ public class JwtUtil {
                 .claim("roles", roles)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(io.jsonwebtoken.security.Keys.hmacShaKeyFor(jwtSecretKey.getBytes()))
+                .signWith(key())
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetailsImpl userDetails){
+    public Boolean validateToken(String token, UserDetails userDetails){
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
