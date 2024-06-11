@@ -1,5 +1,6 @@
 package dev.thesarfo.lexchange.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Profile {
+public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +24,7 @@ public class Profile {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
     private String username;
@@ -31,7 +33,7 @@ public class Profile {
 
     private String profilePhoto;
 
-    public Profile(User user){
+    public UserProfile(User user){
         this.username = user.getUsername();
     }
 }
