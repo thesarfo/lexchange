@@ -1,5 +1,6 @@
 package dev.thesarfo.lexchange.exception;
 
+import dev.thesarfo.lexchange.exception.aws.InvalidFileException;
 import dev.thesarfo.lexchange.exception.profile.ProfileNotFoundException;
 import dev.thesarfo.lexchange.exception.user.UserAlreadyExistsException;
 import dev.thesarfo.lexchange.model.error.ErrorDetails;
@@ -19,7 +20,7 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ExceptionHandler({UserAlreadyExistsException.class, InvalidFileException.class})
     public ResponseEntity<Object> badRequestHandler(UserAlreadyExistsException ex, WebRequest req){
         List<ErrorDetails> errors = new ArrayList<>();
         errors.add(new ErrorDetails(ex.getMessage(), req.getDescription(false), LocalDateTime.now()));
