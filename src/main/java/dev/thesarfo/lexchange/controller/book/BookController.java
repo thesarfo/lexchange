@@ -22,7 +22,7 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Object> createBook(@Valid @RequestBody BookRequest bookRequest){
-        return ResponseHandler.successResponse(SuccessMessages.BOOK_CREATED,
-                bookService.createBook(bookRequest), HttpStatus.OK);
+        return ResponseHandler.response(SuccessMessages.BOOK_CREATED, HttpStatus.OK,
+                bookService.createBook(bookRequest));
     }
 }
