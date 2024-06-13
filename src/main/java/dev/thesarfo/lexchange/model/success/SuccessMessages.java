@@ -9,4 +9,5 @@ public class SuccessMessages {
     public static final String PROFILE_RETRIEVED = "Profile retrieved";
     public static final String PROFILE_UPDATED = "Profile updated";
     public static final String PASSWORD_CHANGED = "Password changed";
+    public static final String PFP_UPDATE_SUCCESS = "Profile image has been updated";
 }
