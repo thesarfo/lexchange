@@ -25,7 +25,7 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public UserProfile updateProfile(Long id, UpdateProfileRequest profile) {
+    public UserProfile updateProfile(Integer id, UpdateProfileRequest profile) {
         UserProfile existingProfile = profileRepository.findById(id)
                 .orElseThrow(() -> new ProfileNotFoundException(ErrorMessages.PROFILE_NOT_FOUND));
 

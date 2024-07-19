@@ -5,5 +5,5 @@ import dev.thesarfo.lexchange.model.dto.request.profile.UpdateProfileRequest;
 
 public interface ProfileService {
     UserProfile retrieveProfile(String username);
-    UserProfile updateProfile(Long id, UpdateProfileRequest profile);
+    UserProfile updateProfile(Integer id, UpdateProfileRequest profile);
 }
