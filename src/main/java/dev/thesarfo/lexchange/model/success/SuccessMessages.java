@@ -10,4 +10,5 @@ public class SuccessMessages {
     public static final String PROFILE_UPDATED = "Profile updated";
     public static final String PASSWORD_CHANGED = "Password changed";
     public static final String BOOK_CREATED = "Book created";
+    public static final String BOOKS_RETRIEVED = "Books retrieved";
 }
