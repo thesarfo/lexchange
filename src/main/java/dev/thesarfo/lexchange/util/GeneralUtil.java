@@ -2,21 +2,27 @@ package dev.thesarfo.lexchange.util;
 
 import dev.thesarfo.lexchange.entity.user.User;
 import dev.thesarfo.lexchange.entity.user.UserProfile;
+import dev.thesarfo.lexchange.exception.user.UserNotFoundException;
 import dev.thesarfo.lexchange.model.dto.request.profile.UpdateProfileRequest;
 import dev.thesarfo.lexchange.model.dto.request.user.ChangePasswordRequest;
 import dev.thesarfo.lexchange.model.error.ErrorMessages;
+import dev.thesarfo.lexchange.repository.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class GeneralUtil {
 
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
-    private GeneralUtil(PasswordEncoder passwordEncoder){
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public static void updateProfileFields(UpdateProfileRequest profile, UserProfile existingProfile) {
         if (profile.username() != null){
@@ -51,5 +57,19 @@ public class GeneralUtil {
         if (request.oldPassword().equals(request.newPassword())){
             throw new BadCredentialsException(ErrorMessages.OLD_AND_NEW_PASSWORD_EQUAL);
         }
+    }
+
+    public String getUsernameFromSecurityContext() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        } else {
+            return principal.toString();
+        }
+    }
+
+    public User getUserOrThrowException(String username){
+        return userRepository.findByUsername(username)
+                .orElseThrow(()-> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND + username));
     }
 }
