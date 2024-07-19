@@ -40,7 +40,7 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public UserProfile updateProfile(Long id, UpdateProfileRequest profile) {
+    public UserProfile updateProfile(Integer id, UpdateProfileRequest profile) {
         UserProfile existingProfile = profileRepository.findById(id)
                 .orElseThrow(() -> new ProfileNotFoundException(ErrorMessages.PROFILE_NOT_FOUND));
 
@@ -50,7 +50,7 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public UserProfile uploadPfp(Long id, String key, MultipartFile file) {
+    public UserProfile uploadPfp(Integer id, String key, MultipartFile file) {
         if (!generalUtil.isValidFile(file)) {
             throw new InvalidFileException(ErrorMessages.INVALID_FILE);
         }
@@ -63,7 +63,7 @@ public class ProfileServiceImpl implements ProfileService{
         return profileRepository.save(profile);
     }
 
-    private UserProfile setPfpToUploadedImg(Long id, String key) {
+    private UserProfile setPfpToUploadedImg(Integer id, String key) {
         UserProfile profile = profileRepository.findById(id)
                 .orElseThrow(() -> new ProfileNotFoundException(ErrorMessages.PROFILE_NOT_FOUND));
         String url = amazonS3.getUrl(bucketName, key).toString();
