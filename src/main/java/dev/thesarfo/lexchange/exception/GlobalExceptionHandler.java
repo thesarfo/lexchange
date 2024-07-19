@@ -2,6 +2,7 @@ package dev.thesarfo.lexchange.exception;
 
 import dev.thesarfo.lexchange.exception.profile.ProfileNotFoundException;
 import dev.thesarfo.lexchange.exception.user.UserAlreadyExistsException;
+import dev.thesarfo.lexchange.exception.user.UserNotFoundException;
 import dev.thesarfo.lexchange.model.error.ErrorDetails;
 import dev.thesarfo.lexchange.util.ResponseHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
-    @ExceptionHandler(ProfileNotFoundException.class)
+    @ExceptionHandler({ProfileNotFoundException.class, UserNotFoundException.class})
     public ResponseEntity<Object> notFoundExceptionHandler(ProfileNotFoundException ex, WebRequest req){
         List<ErrorDetails> errors = new ArrayList<>();
         errors.add(new ErrorDetails(ex.getMessage(), req.getDescription(false), LocalDateTime.now()));
