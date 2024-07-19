@@ -25,7 +25,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -34,8 +34,6 @@ public class Category {
     }
 
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @ManyToMany(mappedBy = "categories")
     private Set<Book> books = new HashSet<>();
 }
