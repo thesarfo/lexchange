@@ -14,6 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -71,5 +75,16 @@ public class GeneralUtil {
     public User getUserOrThrowException(String username){
         return userRepository.findByUsername(username)
                 .orElseThrow(()-> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND + username));
+    }
+
+    public boolean isValidFile(MultipartFile file){
+        long maxSize = 1024 * 1024 * 5; // 5MB
+
+        List<String> allowedContentTypes = Arrays.asList(
+                "image/*",
+                "image/jpeg",
+                "image/png"
+        );
+        return file.getSize() <= maxSize && allowedContentTypes.contains(file.getContentType());
     }
 }

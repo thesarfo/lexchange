@@ -5,11 +5,14 @@ import dev.thesarfo.lexchange.entity.book.Category;
 import dev.thesarfo.lexchange.entity.user.User;
 import dev.thesarfo.lexchange.model.dto.request.book.BookRequest;
 import dev.thesarfo.lexchange.model.dto.response.book.BookResponse;
+import dev.thesarfo.lexchange.model.enums.BookStatus;
 import dev.thesarfo.lexchange.repository.book.BookRepository;
 import dev.thesarfo.lexchange.repository.book.CategoryRepository;
 import dev.thesarfo.lexchange.util.GeneralUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
+    private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
     private final GeneralUtil generalUtil;
@@ -37,6 +41,7 @@ public class BookServiceImpl implements BookService {
                 .description(bookRequest.description())
                 .author(bookRequest.author())
                 .categories(categories)
+                .status(BookStatus.AVAILABLE)
                 .user(user)
                 .build();
 
@@ -50,9 +55,7 @@ public class BookServiceImpl implements BookService {
         String username = generalUtil.getUsernameFromSecurityContext();
         User user = generalUtil.getUserOrThrowException(username);
         Page<Book> books = bookRepository.findAllByUser(user, page);
-        return new PageImpl<>(
-                books.stream().map(BookServiceImpl::createBookResponseDto).toList()
-        );
+        return books.map(BookServiceImpl::createBookResponseDto);
     }
 
     private static BookResponse createBookResponseDto(Book savedBook) {
@@ -64,6 +67,7 @@ public class BookServiceImpl implements BookService {
                 savedBook.getCategories().stream()
                         .map(Category::getName)
                         .collect(Collectors.toSet()),
+                savedBook.getStatus(),
                 savedBook.getUser().getId()
         );
     }

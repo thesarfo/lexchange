@@ -32,8 +32,8 @@ public class UpdateProfileController {
     }
 
     @PatchMapping("/image/{id}")
-    public ResponseEntity<Object> uploadProfileImage(@PathVariable Long id, @RequestParam("file")MultipartFile file){
-        return ResponseHandler.response(SuccessMessages.PFP_UPDATE_SUCCESS,
+    public ResponseEntity<Object> uploadProfileImage(@PathVariable Integer id, @RequestParam("file")MultipartFile file){
+        return ResponseHandler.response(SuccessMessages.PFP_UPDATED,
                  HttpStatus.OK, profileService.uploadPfp(id, file.getOriginalFilename(), file));
     }
 }

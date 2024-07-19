@@ -2,7 +2,10 @@ package dev.thesarfo.lexchange.entity.book;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.thesarfo.lexchange.entity.user.User;
+import dev.thesarfo.lexchange.model.enums.BookStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,6 +48,9 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;
 
     @ManyToOne
     @JsonIgnore
