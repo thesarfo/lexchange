@@ -10,9 +10,11 @@ import dev.thesarfo.lexchange.repository.book.CategoryRepository;
 import dev.thesarfo.lexchange.util.GeneralUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,13 +46,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookResponse> viewAllBooks() {
+    public Page<BookResponse> viewAllBooks(Pageable page) {
         String username = generalUtil.getUsernameFromSecurityContext();
         User user = generalUtil.getUserOrThrowException(username);
-        List<Book> books = bookRepository.findAllByUser(user);
-        return books.stream()
-                .map(BookServiceImpl::createBookResponseDto)
-                .collect(Collectors.toList());
+        Page<Book> books = bookRepository.findAllByUser(user, page);
+        return new PageImpl<>(
+                books.stream().map(BookServiceImpl::createBookResponseDto).toList()
+        );
     }
 
     private static BookResponse createBookResponseDto(Book savedBook) {
