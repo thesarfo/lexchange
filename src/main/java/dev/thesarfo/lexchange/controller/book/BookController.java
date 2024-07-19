@@ -6,6 +6,7 @@ import dev.thesarfo.lexchange.service.book.BookServiceImpl;
 import dev.thesarfo.lexchange.util.ResponseHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,8 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> viewAllBooks(){
+    public ResponseEntity<Object> viewAllBooks(Pageable pageable){
         return ResponseHandler.response(SuccessMessages.BOOKS_RETRIEVED, HttpStatus.OK,
-                bookService.viewAllBooks());
+                bookService.viewAllBooks(pageable));
     }
 }
