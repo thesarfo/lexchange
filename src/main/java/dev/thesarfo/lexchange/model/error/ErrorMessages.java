@@ -15,4 +15,6 @@ public class ErrorMessages {
     public static final String OLD_PASSWORD_INCORRECT = "Old password is incorrect";
     public static final String NEW_PASSWORD_SAME_AS_OLD = "New password cannot be the same as old password";
     public static final String OLD_AND_NEW_PASSWORD_EQUAL = "New password cannot be the same as the old password";
+    public static final String INVALID_FILE = "Only png and jpeg formats are allowed";
+    public static final String FILE_ERROR = "Could not upload this file";
 }

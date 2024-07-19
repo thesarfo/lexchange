@@ -8,6 +8,10 @@ import dev.thesarfo.lexchange.model.error.ErrorMessages;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class GeneralUtil {
@@ -30,9 +34,9 @@ public class GeneralUtil {
         if (profile.bio() != null){
             existingProfile.setBio(profile.bio());
         }
-//        if (profile.profilePhoto() != null){
-//            existingProfile.setProfilePhoto(profile.profilePhoto());
-//        }
+        if (profile.profilePhoto() != null){
+            existingProfile.setProfilePhoto(profile.profilePhoto());
+        }
     }
 
     public void checkIfIncomingNewPasswordEqualsExistingPassword(ChangePasswordRequest request, User user) {
@@ -51,5 +55,16 @@ public class GeneralUtil {
         if (request.oldPassword().equals(request.newPassword())){
             throw new BadCredentialsException(ErrorMessages.OLD_AND_NEW_PASSWORD_EQUAL);
         }
+    }
+
+    public boolean isValidFile(MultipartFile file){
+        long maxSize = 1024 * 1024 * 5; // 5MB
+
+        List<String> allowedContentTypes = Arrays.asList(
+                "image/*",
+                "image/jpeg",
+                "image/png"
+        );
+        return file.getSize() <= maxSize && allowedContentTypes.contains(file.getContentType());
     }
 }
