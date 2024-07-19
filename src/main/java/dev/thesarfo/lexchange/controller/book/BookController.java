@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,11 @@ public class BookController {
     public ResponseEntity<Object> createBook(@Valid @RequestBody BookRequest bookRequest){
         return ResponseHandler.response(SuccessMessages.BOOK_CREATED, HttpStatus.OK,
                 bookService.createBook(bookRequest));
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> viewAllBooks(){
+        return ResponseHandler.response(SuccessMessages.BOOKS_RETRIEVED, HttpStatus.OK,
+                bookService.viewAllBooks());
     }
 }

@@ -4,6 +4,7 @@ import dev.thesarfo.lexchange.model.dto.request.profile.UpdateProfileRequest;
 import dev.thesarfo.lexchange.model.success.SuccessMessages;
 import dev.thesarfo.lexchange.service.profile.ProfileServiceImpl;
 import dev.thesarfo.lexchange.util.ResponseHandler;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class UpdateProfileController {
     private final ProfileServiceImpl profileService;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateProfile(@PathVariable Long id, @Valid @RequestBody UpdateProfileRequest request){
+    public ResponseEntity<Object> updateProfile(@PathVariable Integer id, @Valid @RequestBody UpdateProfileRequest request){
         return ResponseHandler.response(SuccessMessages.PROFILE_UPDATED,
                 HttpStatus.OK, profileService.updateProfile(id, request));
     }
