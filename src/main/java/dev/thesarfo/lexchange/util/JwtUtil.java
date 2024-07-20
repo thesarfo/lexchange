@@ -15,6 +15,12 @@ import java.util.Date;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * <p>This class contains several utility methods that are used in relation to a JWT Token</p>
+ *
+ * @author Ernest Sarfo
+ * @since 1.0
+ */
 @Service
 public class JwtUtil {
 

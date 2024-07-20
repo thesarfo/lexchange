@@ -20,6 +20,12 @@ import java.io.IOException;
 
 import static dev.thesarfo.lexchange.util.GeneralUtil.updateProfileFields;
 
+/**
+ * <p>This class contains various methods being used to manipulate the user's profile</p>
+ *
+ * @author Ernest Sarfo
+ * @since 1.0
+ */
 @Service
 @RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService{

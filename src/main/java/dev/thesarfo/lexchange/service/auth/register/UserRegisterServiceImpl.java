@@ -25,6 +25,14 @@ public class UserRegisterServiceImpl implements UserRegisterService{
     private final UserProfileRepository userProfileRepository;
 
 
+    /**
+     * <p>This method registers new users onto the system </p>
+     *
+     * @param userRegisterRequest the minimum details a user should provide during registration
+     * @return the details of the registered user, if successful
+     *
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserResponseDto registerUser(UserRegisterRequest userRegisterRequest) {

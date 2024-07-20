@@ -8,6 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * <p>This class provides the base configuration of setting up AWS for this project</p>
+ *
+ * @author Ernest Sarfo
+ * @since 1.0
+ */
+
 @Configuration
 public class AwsConfig {
 
@@ -20,6 +27,11 @@ public class AwsConfig {
     @Value("${aws.s3.region}")
     private String region;
 
+    /**
+     * <p>It uses the access key, secret key and AWS region to establish a connection to an s3 bucket</p>
+     *
+     * @return AmazonS3 bucket connection
+     */
     @Bean
     public AmazonS3 amazonS3(){
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
