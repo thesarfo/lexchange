@@ -10,6 +10,14 @@ import org.springframework.http.ResponseEntity;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>During development, there is the need to return a consistent API response. This class contains all the possible
+ * API responses</p>
+ *
+ * @author Ernest Sarfo
+ * @since 1.0
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor

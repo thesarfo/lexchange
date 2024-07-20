@@ -19,6 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>The GeneralUtil class contains several utility methods that are used everywhere in the codebase.
+ * During development, there is the need to abstract certain functionalities from service or controller classes.
+ * This class serves as the entrypoint to all those abstractions</p>
+ *
+ * @author Ernest Sarfo
+ * @since 1.0
+ */
+
 @Component
 @RequiredArgsConstructor
 public class GeneralUtil {
