@@ -17,11 +17,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
+
+
+/**
+ * User is the main entity we use to identify everyone in the system
+ *
+ * @author Ernest Sarfo
+ *
+ */
 
 @Entity
 @Getter

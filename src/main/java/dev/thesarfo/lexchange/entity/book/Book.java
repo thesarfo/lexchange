@@ -23,6 +23,14 @@ import org.hibernate.annotations.ManyToAny;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A book is the other main entity on our system.
+ * Books have a ManyToOne relationship between its users
+ *
+ * @author Ernest Sarfo
+ *
+ */
+
 @Entity
 @Getter
 @Setter
