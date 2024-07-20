@@ -23,6 +23,15 @@ public class UserLoginServiceImpl implements UserLoginService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    /**
+     * <p>This method logs users into the system </p>
+     *
+     * @param loginRequest the minimum details a user should provide during login
+     * @return a bearer token, and the details of the successfully logged-in user
+     *
+     * @throws BadCredentialsException if the user inputs wrong log in details.
+     * @since 1.0
+     */
     public JwtResponse signin(UserLoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
